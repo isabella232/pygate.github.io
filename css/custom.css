@@ -46,7 +46,7 @@ body {
 }
 
 .container-md {
-  padding: 3em;
+  padding: 1em;
 }
 
 #about {
@@ -90,7 +90,7 @@ hr.teal {
 .component-square {
   background-color: #87d9df;
   border: 5px solid #87d9df;
-  margin: 30px;
+  margin: 30px 10px;
   padding: 0;
   border-radius: 0.5em;
 }
