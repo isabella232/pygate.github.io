@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- copyright Peter Van Garderen 2020 -->
+
+    <title>pygate</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+</head>
+<body id="top">
+
+  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" id="mainNav">
+    <a class="navbar-brand" href="#top"><img src="static/pygate-logo.png" /></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#top">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#components">Components</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#team">Team</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/pygate"><img src="static/github-logo.png" /></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+<div id="header">
+  <img src= "static/data-network-tech.jpg" class="img-fluid" style="min-height: 700px; opacity: 0.8;"/>
+  <div class="centered">
+     <strong>Python interface & tools<br />
+     for the Filecoin network</strong><br />
+     <a href="https://filecoin.io"><img src="static/filecoin-logo.png" style="margin-top: 20px; margin-right: 20px;" /></a>
+     <a href="https://python.org"><img src="static/python-logo.png" style="margin-top: 20px;"/></a><br />
+     <a href="https://hackfs.com/"><img src="static/hackfs-logo.png" /></a>
+    </div>
+</div>
+
+<div id="about">
+<div class="container-md">
+<h2>About</h2>
+<hr class="white">
+Pygate is a <a href="https://hackfs.com">HackFS</a> project. Its goal is to be a gateway to the <a href="https://filecoin.io">Filecoin</a> network and <a href="https://ipfs.io">IPFS</a> technology for <a href="https://www.pythonistaplanet.com/pythonista/">Pythonistas</a>. To date, most of the tooling has been geared towards Javascript and Golang developers.
+<p style="margin-top: 30px;">
+The project is divided into four phases with its own deliverable. Each is intended to serve as a stand-alone component that can be used in other projects.
+<br />
+<img src= "static/pygate-concept.png" class="img-fluid" style="margin: 20px 0; border: 2px solid #000;" />
+<ol>
+  <li>A Python gRPC interface to the <a href="https://textile.io/">Textile.io</a> <a href="https://docs.textile.io/powergate/">Powergate</a> Filecoin API.</li>
+  <li>A <a href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> web application that uses the pygate gRCP client to move data to and from the Filecoin network and monitor storage deals.</li>
+  <li>An <a href="https://www.electronjs.org">Electron</a> desktop application, powered by the Flask app, that allows users to drag-and-drop files to and from the Filecoin network and manage their storage deals.</li>
+  <li>An <a href="https://ethereum.org/en/">Ethereum</a> smart contract, embedded into the desktop app, that manages an escrow account and acts as an agent for storage users to negotiate recurring deals with Filecoin miners to provide them with the desired combination of price, redundancy, and longevity.
+</ol>
+</p>
+<p style="margin-top: 30px;">
+The Pygate components are currently in active development and not yet available for release. You can follow progress in our Github <a href="https://github.com/pygate">repositories</a>, including their wikis. Read more about their requirements below.
+</p>
+</div>
+<!-- About-->
+</div>
+
+<div id="components">
+  <div class="container-md" style="text-align: center;">
+  <h2>Components</h2>
+  <hr class="teal">
+
+  <div class="row" style="margin-top: 30px;">
+
+  <div class="col-md component-square">
+    <img src="static/client.png" class="img-fluid" style="width: 128px; length: 128px; margin: 50px 0px 30px 0px;"/>
+    <h2 style="margin-bottom: 30px;">gRPC client</h2>
+    <div class="component-content">
+      <ul style="padding: 0; margin-left: 20px;">
+        <li>Release v.0.1.0 of the pygate <a href="https://grpc.io/">gRPC</a> client will be used to recreate the same commands/steps from Textile's <a href="https://docs.textile.io/powergate/">Powergate</a> <a href="https://gist.github.com/andrewxhill/b0010d555ca4d79d9d1e78e380ad218e#file-index-md">tutorial</a> using a Python script that prints to CLI:</li>
+        <p>
+          <pre>
+pow help
+pow ffs create
+pow ffs addrs list
+pow ffs addToHot [filename]
+pow ffs push --watch [CID]
+pow ffs log [CID]
+pow ffs info [CID]
+pow ffs config default
+pow ffs push [CID] -c [custom_cidconfig.json] -o
+pow ffs get [CID]
+        </pre>
+        <ul style="padding: 0; margin-left: 10px;">
+          <li>Basic wallet functionality is also critical to a minimal viable product so the gRPC client MVP will include:</li>
+          <p>
+          <pre>
+pow wallet balance
+pow wallet new
+pow wallet switch</pre>
+
+
+    </div>
+    <a href="https://github.com/pygate/pygate-grpc"><img src="static/github-logo2.png" class="img-fluid" style="width: 157px; length: 34px; margin: 50px 0px 30px 0px;"/></a>
+
+  </div>
+
+  <div class="col-md component-square">
+    <img src="static/server.png" class="img-fluid" style="width: 128px; length: 128px; margin: 50px 0px 30px 0px;"/>
+    <h2 style="margin-bottom: 30px;">web app</h2>
+
+    <div class="component-content">
+      <ul style="padding: 0; margin-left: 20px;">
+        <li>Release v.0.1.0 will be a <a hre="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> web application that integrates the pygate-gRPC library to make Powergate API calls.</li>
+        <li>Will expose Powergate API and Textile Buckets functionality through a <a href="https://github.com/python-restx/flask-restx">RestX</a> API that can be consumed by the native Flask UI client or other clients such as <a href="https://github.com/filecoin-project/slate">Slate</a>.</li>
+        <li>Will include a basic file upload dialog to choose files to move to Filecoin.</li>
+        <li>Will allow a user to trigger each of the pygate-gRPC v.0.1.0 commands from a web form and output progress/results to the same webpage.</li>
+        <li>Runs each command as a <a href="https://docs.celeryproject.org/en/latest/index.html">Celery</a> background task to allow for asynchronous feedback on the webpage (i.e. so it doesn't freeze waiting for Powergate calls to complete).</li>
+        <li>Uses the localnet/testnet wallets that come with a default balance. User management of wallet funding will be address in the desktop app.</li>
+
+    </div>
+    <a href="https://github.com/pygate/pygate-webapp"><img src="static/github-logo2.png" class="img-fluid" style="width: 157px; length: 34px; margin: 50px 0px 30px 0px;"/></a>
+
+  </div>
+
+  <!-- row -->
+  </div>
+
+  <div class="row">
+
+  <div class="col-md component-square">
+    <img src="static/desktop.png" class="img-fluid" style="width: 128px; length: 128px; margin: 50px 0px 30px 0px;"/>
+    <h2 style="margin-bottom: 30px;">desktop app</h2>
+
+    <div class="component-content">
+      <ul style="padding: 0; margin-left: 20px;">
+      <li>A cross-platform (Windows, Mac OS, Linux) desktop application (e.g. <a href="https://www.electronjs.org/">Electron</a>).</li>
+      <li>Allows for drag-n-drop of files and folders from file explorer or Desktop as well as an upload dialog.</li>
+      <li>The files or folders (with nested folders/files) become a Textile <a href="https://docs.textile.io/buckets/">Bucket</a>.</li>
+      <li>The app encrypts content by default (option to disable if user wants to publicly share content via <a href="https://ipfs.io">IPFS</a>/<a href="https://filecoin.io">Filecoin</a>).</li>
+      <li>The user manages their own private keys, including a seed phrase option (i.e. the objective is for a zero-trust architecture).</li>
+      <li>The app manages a Filecoin wallet (possibly in app or in Ethereum contract) to fund the storage deal.</li>
+      <li>The app provides a GUI for the user to set the number of redundant copies on Filecoin network, country preferences (if any), miner allow list (if any), miner deny list (if any).</li>
+      <li>The app notifies the user how long their content will be stored under the terms of the current storage deals.</li>
+      <li>The user has option to toggle number of copies and length of storage to play around with price and duration.</li>
+      <li>The user has option to set frequency of storage deal renewals and to have app automatically renegotiate new storage deals based on their (config preferences) and default storage period (e.g. renegotiate every day, week, month, 2 months, year) to try and arbitrage best rate.</li>
+      <li>The user deposits ETH and/or FIL in smart contract as escrow to fund the initial storage deal and subsequent renewals.</li>
+      <li>The app provides email warnings and pop-up notifications when funding is nearing its end and their content is in danger of being wiped from Filecoin miners (time-period and frequency of warnings is user configurable).</li>
+      <li>The app GUI provides a File Explorer type interface that includes all folders/files that are known to the app with colour coding to indicate whether a file is stored on Filecoin, is about to expire on Filecoin (expiration time-period is a configurable setting), is synced on IPFS, and/or has a local OS copy available.</li>
+      <li>The app GUI provides info on when the last time a proof-of-space-time was run against the file (i.e. serves as a fixity/authenticity check).</li>
+      <li>When user requests file retrieval, the app finds the cheapest retrieval deal amongst the miners in use and delivers files/folders to desktop (or designated folder on OS filesystem).</li>
+      <li>Enhancement: Include IPFS pinning on user-controlled machines and servers or on paid pinning services for redundancy and (hot) availability.</li>
+      <li>Enhancement: Allow for syncing of watched folders on OS (automatic updates to Filecoin Bucket) when a file is added, modified, or deleted in watched folder.</li>
+    </div>
+
+    <a href="https://github.com/pygate/pygate-desktop"><img src="static/github-logo2.png" class="img-fluid" style="width: 157px; length: 34px; margin: 50px 0px 30px 0px;"/></a>
+  </div>
+
+  <div class="col-md component-square">
+    <img src="static/smart-contract.png" class="img-fluid" style="width: 128px; length: 128px; margin: 50px 0px 30px 0px;"/>
+    <h2 style="margin-bottom: 30px;">smart contract</h2>
+
+    <div class="component-content">
+      <ul style="padding: 0; margin-left: 20px;">
+        <li>Serve as an escrow wallet that dispenses ETH and/or FIL to fund Filecoin storage deals.</li>
+    </div>
+
+    <a href="https://github.com/pygate/pygate-contracts"><img src="static/github-logo2.png" class="img-fluid" style="width: 157px; length: 34px; margin: 50px 0px 30px 0px;"/></a>
+  </div>
+
+
+  <!-- row -->
+  </div>
+
+
+<!-- Components-->
+</div>
+
+
+<div id="team">
+  <div class="container-md">
+  <h2>Team</h2>
+  <hr class="teal" style="margin-bottom: 50px;">
+
+  <div class="row">
+    <div class="col-md profile">
+      <div class="circle" id="peter"></div>
+      <strong><a href="https://twitter.com/pjvangarderen">Peter Van Garderen</a></strong>
+      <br />Vancouver, Canada
+    </div>
+    <div class="col-md profile">
+      <div class="circle" id="antreas"></div>
+      <strong><a href="https://www.linkedin.com/in/a-pogiatzis/">Antreas Pogiatzis</a></strong>
+      <br />London, UK
+    </div>
+    <div class="col-md profile">
+      <div class="circle" id="leonard"></div>
+      <strong><a href="https://www.linkedin.com/in/wang-ge/">Leonard Ge</a></strong>
+      <br />London, UK
+    </div>
+    <div class="col-md profile">
+      <div class="circle" id="art"></div>
+      <strong><a href="https://www.linkedin.com/in/richardsart/">Art Richards</a></strong>
+      <br />Berlin, Germany
+    </div>
+    <div class="col-md profile">
+      <div class="circle" id="chinonso"></div>
+      <strong><a href="https://www.linkedin.com/in/ezchinonso/">Chinonso Eze</a></strong>
+      <br />Abuja, Nigeria
+    </div>
+
+  </div>
+<!-- Team-->
+</div>
+
+<script src="js/jquery-3.5.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
