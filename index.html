@@ -172,7 +172,7 @@ The application provides an aggregate dashboard of information about content sto
 
 <hr class="teal">
 
-<h3 style="margin-bottom: 10px;">Use case E: Provide integrity and authenticity checks.</h3>
+<h3 style="margin-bottom: 10px;">Use case E: Provide integrity and authenticity checks for files on the Filecoin network.</h3>
 <ol>
 <li>The application monitors the Filecoin blockchain for the random, periodic proofs-of-space-time that the miner(s) will submit for each storage deal. When it encounters a proof for content that it has submitted, the application will update the corresponding storage deal metadata and index it for browsing and searching purposes.</li>
 <li>The application allows the user to periodically initiate their own check of the fixity of one, some, or all of their stored files. This process will guarantee to the user that the file(s) stored on the Filecoin network have not been changed and has remained in storage for an uninterrupted period of time. This is the key determinant in establishing the file’s authenticity. The result of this check will be added to the corresponding storage deal’s metadata and indexed for browsing and searching purposes.</li>
@@ -183,7 +183,10 @@ The application provides an aggregate dashboard of information about content sto
 <hr class="teal">
 
 <h3 style="margin-bottom: 10px;">Use case F: Renegotiate storage deals for files already on the Filecoin network.</h3>
-The application will monitor storage deals for upcoming expiry dates and if the renewal configuration is set to true, it will re-negotiate storage deals using the default configuration settings. The desktop application will negotiate the best price for the user using the maximum price and minimum deal length settings. It will also comply with the number of redundant copies and geographical distribution settings.
+<ol>
+  <li>The application will monitor storage deals for upcoming expiry dates and if the renewal configuration is set to true, it will re-negotiate storage deals using the default configuration settings.</li>
+  <li>The application will negotiate the best price for the user using the maximum price and minimum deal length settings.</li>
+  <li>It will also comply with the number of redundant copies and geographical distribution settings.</li>
 
 
 <hr class="teal">
@@ -197,16 +200,16 @@ The application will monitor storage deals for upcoming expiry dates and if the 
   <li>If the CID is not available on IPFS, the application will search the Filecoin network for all possible providers of the desired data (via the DHT, the chain, or out-of-band aggregators), compare deal terms, and chose the best retrieval option.</li>
   <li>Once a miner is selected:
     <ol>
-      <li>the application will send a RetrievalQuery (“Here’s the PayloadCID of the data I want.”)</li>
-      <li>the miner sends a RetrievalQueryResponse (“I do have that data, and can send it to you for this price”.)</li>
-      <li>the desktop application sends a RetrievalDealProposal (“Yes I like those terms, go ahead.”)</li>
-      <li>the miner sends a RetrievalDealResponse (“I accept your deal.”)</li>
-      <li>the miner unseals the data</li>
-      <li>a payment channel is opened</li>
-      <li>the miner sends a RetrievalDealResponse (“Here's part of your data, pay me before I send the next.”)</li>
-      <li>the application confirms the data is correct, and sends the partial payment via the payment channel (“Here's the partial payment, keep going.”)</li>
-      <li>steps 7 and 8 are repeated until retrieval is complete</li>
-      <li>the last payment for the remainder of bytes is made and the retrieval deal is complete.</li>
+      <li>The application will send a RetrievalQuery (“Here’s the PayloadCID of the data I want.”)</li>
+      <li>The miner sends a RetrievalQueryResponse (“I do have that data, and can send it to you for this price”.)</li>
+      <li>The desktop application sends a RetrievalDealProposal (“Yes I like those terms, go ahead.”)</li>
+      <li>The miner sends a RetrievalDealResponse (“I accept your deal.”)</li>
+      <li>The miner unseals the data</li>
+      <li>A payment channel is opened</li>
+      <li>The miner sends a RetrievalDealResponse (“Here's part of your data, pay me before I send the next.”)</li>
+      <li>The application confirms the data is correct, and sends the partial payment via the payment channel (“Here's the partial payment, keep going.”)</li>
+      <li>Steps 7 and 8 are repeated until retrieval is complete</li>
+      <li>The last payment for the remainder of bytes is made and the retrieval deal is complete.</li>
       <li>The application decrypts the files using the private key it has custody of.</li>
       <li>The application will recreate the original directory and sub-directory structure in the designated download space.</li>
     </ol>
