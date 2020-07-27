@@ -27,7 +27,7 @@
           <a class="nav-link" href="#about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#components">Components</a>
+          <a class="nav-link" href="#usecases">Use cases</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#team">Team</a>
@@ -57,133 +57,168 @@
 <hr class="white">
 Pygate is a <a href="https://hackfs.com">HackFS</a> project. Its goal is to be a gateway to the <a href="https://filecoin.io">Filecoin</a> network and <a href="https://ipfs.io">IPFS</a> technology for <a href="https://www.pythonistaplanet.com/pythonista/">Pythonistas</a>. To date, most of the tooling has been geared towards Javascript and Golang developers.
 <p style="margin-top: 30px;">
-The project is divided into four phases with its own deliverable. Each is intended to serve as a stand-alone component that can be used in other projects.
+The Pygate project has three deliverables:
+  <ol>
+    <li>A Python gRPC client for the Textile.io <a href="https://docs.textile.io/powergate/">Powergate</a> Filecoin API.</li>
+    <li>A <a href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> based API that uses the pygate gRCP client to provide a web socket interface to the Filecoin network. It is intended to support web apps with issues such as wallet management and the long-running tasks which are expected for transactions on the Filecoin network.</li>
+    <li>A Flask web application that is meant to serve as a template from which to create more sophisticated Filecoin applications.</li>
+  </ol>
 <br />
-<img src= "static/pygate-concept.png" class="img-fluid" style="margin: 20px 0; border: 2px solid #000;" />
-<ol>
-  <li>A Python gRPC interface to the <a href="https://textile.io/">Textile.io</a> <a href="https://docs.textile.io/powergate/">Powergate</a> Filecoin API.</li>
-  <li>A <a href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> web application that uses the pygate gRCP client to move data to and from the Filecoin network and monitor storage deals.</li>
-  <li>An <a href="https://www.electronjs.org">Electron</a> desktop application, powered by the Flask app, that allows users to drag-and-drop files to and from the Filecoin network and manage their storage deals.</li>
-  <li>An <a href="https://ethereum.org/en/">Ethereum</a> smart contract, embedded into the desktop app, that manages an escrow account and acts as an agent for storage users to negotiate recurring deals with Filecoin miners to provide them with the desired combination of price, redundancy, and longevity.
-</ol>
+<img src= "static/pygate-concept-v2.png" class="img-fluid" style="margin: 20px 0; border: 2px solid #000;" />
+
 </p>
 <p style="margin-top: 30px;">
-The Pygate components are currently in active development and not yet available for release. You can follow progress in our Github <a href="https://github.com/pygate">repositories</a>, including their wikis. Read more about their requirements below.
+The Pygate components are currently in active development and not yet available for release. You can follow progress in our Github <a href="https://github.com/pygate">repositories</a>. Below are the use cases which we hope the API and web application will eventually support.
 </p>
 </div>
 <!-- About-->
 </div>
 
-<div id="components">
-  <div class="container-md" style="text-align: center;">
-  <h2>Components</h2>
+<div id="usecases">
+  <div class="container-md" style="margin-top: 100px;">
+  <h2 style="text-align: center;">Use cases</h2>
   <hr class="teal">
 
-  <div class="row" style="margin-top: 30px;">
+  <div class="component-square">
 
-  <div class="col-md component-square">
-    <img src="static/client.png" class="img-fluid" style="width: 128px; length: 128px; margin: 50px 0px 30px 0px;"/>
-    <h2 style="margin-bottom: 30px;">gRPC client</h2>
-    <div class="component-content">
-      <ul style="padding: 0; margin-left: 20px;">
-        <li>Release v.0.1.0 of the pygate <a href="https://grpc.io/">gRPC</a> client will be used to recreate the same commands/steps from Textile's <a href="https://docs.textile.io/powergate/">Powergate</a> <a href="https://gist.github.com/andrewxhill/b0010d555ca4d79d9d1e78e380ad218e#file-index-md">tutorial</a> using a Python script that prints to CLI:</li>
-        <p>
-          <pre>
-pow help
-pow ffs create
-pow ffs addrs list
-pow ffs addToHot [filename]
-pow ffs push --watch [CID]
-pow ffs log [CID]
-pow ffs info [CID]
-pow ffs config default
-pow ffs push [CID] -c [custom_cidconfig.json] -o
-pow ffs get [CID]
-        </pre>
-        <ul style="padding: 0; margin-left: 10px;">
-          <li>Basic wallet functionality is also critical to a minimal viable product so the gRPC client MVP will include:</li>
-          <p>
-          <pre>
-pow wallet balance
-pow wallet new
-pow wallet switch</pre>
-
-
-    </div>
-    <a href="https://github.com/pygate/pygate-grpc"><img src="static/github-logo2.png" class="img-fluid" style="width: 157px; length: 34px; margin: 50px 0px 30px 0px;"/></a>
+    <img src="static/client.png" class="img-fluid" style="width: 128px; length: 128px; margin: 50px;"/>
+    <img src="static/server.png" class="img-fluid" style="width: 128px; length: 128px; margin: 50px;"/>
+    <img src="static/desktop.png" class="img-fluid" style="width: 128px; length: 128px; margin: 50px;"/>
 
   </div>
 
-  <div class="col-md component-square">
-    <img src="static/server.png" class="img-fluid" style="width: 128px; length: 128px; margin: 50px 0px 30px 0px;"/>
-    <h2 style="margin-bottom: 30px;">web app</h2>
+  <br />
 
-    <div class="component-content">
-      <ul style="padding: 0; margin-left: 20px;">
-        <li>Release v.0.1.0 will be a <a hre="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> web application that integrates the pygate-gRPC library to make Powergate API calls.</li>
-        <li>Will expose Powergate API and Textile Buckets functionality through a <a href="https://github.com/python-restx/flask-restx">RestX</a> API that can be consumed by the native Flask UI client or other clients such as <a href="https://github.com/filecoin-project/slate">Slate</a>.</li>
-        <li>Will include a basic file upload dialog to choose files to move to Filecoin.</li>
-        <li>Will allow a user to trigger each of the pygate-gRPC v.0.1.0 commands from a web form and output progress/results to the same webpage.</li>
-        <li>Runs each command as a <a href="https://docs.celeryproject.org/en/latest/index.html">Celery</a> background task to allow for asynchronous feedback on the webpage (i.e. so it doesn't freeze waiting for Powergate calls to complete).</li>
-        <li>Uses the localnet/testnet wallets that come with a default balance. User management of wallet funding will be address in the desktop app.</li>
+  <h3 style="margin-bottom: 10px;">Use case A: Configure and fund a Filecoin wallet.</h3>
 
-    </div>
-    <a href="https://github.com/pygate/pygate-webapp"><img src="static/github-logo2.png" class="img-fluid" style="width: 157px; length: 34px; margin: 50px 0px 30px 0px;"/></a>
+  <ol>
+    <li>The user generates a GNU Privacy Guard (GPG) private and public key to use for unlocking their Filecoin wallet as well as encrypting their stored content.</li>
+    <li>The application assists the user with generating one or more Filecoin wallets using their GPG private key. The user transfers Filecoin cryptocurrency tokens (FIL) from an existing wallet or cryptocurrency exchange to help fund subsequent storage deals.</li>
+    <li>The application provides status updates about the FIL token transfer, including a link to the transaction on a FIL block explorer and indication of a successful transfer after a minimum number of confirmations have been met.</li>
+    <li>The application provides a current balance and transaction history for each of the FIL wallets that the user has configured.</li>
+  </ol>
 
-  </div>
+  <hr class="teal">
+
+  <h3 style="margin-bottom: 10px;">Use case B: Configure the application for use with the Filecoin network.</h3>
+  Using a "Settings" page, the user configures their preferences for Filecoin deals. These are global settings that apply to each storage deal. They are updated when a user’s storage preferences have changed. They include:
+  <ol>
+    <li>Maximum price to offer per Filecoin piece size</li>
+    <li>Number of redundant copies</li>
+    <li>The country code for each redundant copy</li>
+    <li>Minimum length of storage deal</li>
+    <li>Automatic storage deal renewal (defaults to true)</li>
+    <li>Deal expiry notification frequency</li>
+    <li>Filecoin wallet balance notification frequency</li>
+    <li>Blocked miners list</li>
+    <li>Allowed miners list</li>
+    <li>Filecoin wallet address(es)</li>
+  </ol>
+
+  <hr class="teal">
+
+  <h3 style="margin-bottom: 10px;">Use case C: Upload files to the Filecoin network.</h3>
+<ol>
+  <li>From their desktop or laptop device, the user navigates to the top directory of content that they want to transfer to Filecoin. This directory may be on their local filesystem, an external mounted device, or on a network path accessible to their desktop/laptop machine.</li>
+  <li>The user clicks a button to initiate the upload of this selected directory, its sub-directories, and files to Filecoin.</li>
+  <li>The user may also select the top directory from their host OS file explorer and drag it into a designated area within the application's UI to initiate the transfer of the directory, its subdirectories, and files to Filecoin.</li>
+  <li>The contents are encrypted with the user’s GPG private key.</li>
+  <li>The directory and its encrypted contents is chunked to create an Inter Planetary Linked Data (IPLD) Directed Acyclic Graph (DAG). This IPLD DAG is serialized and packaged into a Content Addressable Archive (CAR) format, suitable for storage on Filecoin.</li>
+  <li>The sub-directory structure will be preserved over the course of serializing to CAR format and deserializing it upon retrieval at some point in the future.</li>
+  <li>If the CAR is larger than the maximum 64 GiB sector size currently supported by Filecoin, it will be split into smaller packages.</li>
+  <li>The application runs the content to be stored through a hash-based process to generate the piece commitment (CommP), which is used for confirmation in later phases.</li>
+  <li>The user is presented with the Piece Content Identifier (CID) for the CAR package and is given the option in the  application to associate it with a human-readable name (e.g. "Movies August 2020", “Transfer 2020-003”, “John Doe Papers”, etc.).</li>
+  <li>The CAR package is timestamped.</li>
+  <li>Based on the user’s Filecoin deal settings (see Use case B), the application will prepare one or more Deal Proposals for the CAR package, query the Filecoin blockchain for a list of registered miners, and send each miner a request for its storage asking price.  The “storage ask” contains details such as price, duration, and available storage capacity. The application will match this information to the user’s preferences to select one or more miners.</li>
+  <li>The application locks up sufficient funds in its wallet to pay for the deal(s).</li>
+  <li>The application contacts the preferred miner(s) and proposes the storage deal. If the miner accepts, the deal proposal is counter-signed and published to the Filecoin blockchain.</li>
+  <li>After the deal is published, the desktop application begins transferring data to the miner.</li>
+  <li>Upon receiving all of the data, the miner packs the data into a Filecoin sector, seals it, and begins submitting proofs to the blockchain.</li>
+  <li>For each deal made, the application checks the blockchain for the miner’s SealedSectorCID and confirms that the miner is storing a physically unique copy of the user's data.</li>
+  <li>The storage deal metadata is stored in the application's persistence layer and can be browsed, sorted and searched. This includes:<ol>
+    <li>CAR CID</li>
+    <li>size of the data</li>
+    <li>human-readable package name</li>
+    <li>CAR package timestamp</li>
+    <li>configuration preferences applied to the storage deal</li>
+    <li>storage deal state</li>
+    <li>storage deal expiration date (calculated via duration in block height)</li>
+    <li>dealCID (proposal)</li>
+    <li>dealID</li>
+    <li>minerID</li>
+    <li>SealedSectorCID</li>
+    <li>PieceID (aka CommP)</li></ol>
+  </ol>
+
+  <hr class="teal">
+
+  <h3 style="margin-bottom: 10px;">Use case D: Provide dashboard information about files on the Filecoin network.</h3>
+The application provides an aggregate dashboard of information about content stored on the Filecoin network. It will include:
+<ol>
+  <li>Number of individual files stored in Filecoin</li>
+  <li>Number of CAR packages stored in Filecoin</li>
+  <li>Total storage size of unique CAR packages stored in Filecoin</li>
+  <li>Total storage size of all copies of CAR packages stored in Filecoin</li>
+  <li>FIL balance of wallet(s)</li>
+  <li>Total FIL paid for storage to date</li>
+  <li>Total FIL paid for retrieval to date</li>
+  <li>Current and historical FIL to fiat exchange rates, including conversions for totals shown in #5-7 above</li>
+  <li>Total number of each file format type stored in Filecoin (and how much storage space each file of this type is taking)</li>
+  <li>Total number of different miners storing the user’s content</li>
+  <li>Number of completed storage deals</li>
+  <li>Number of in progress storage deals</li>
+  <li>Total number of storage deals expiring within a given time range (e.g. next 7 days, 30 days, year, etc.)</li>
+</ol>
+
+<hr class="teal">
+
+<h3 style="margin-bottom: 10px;">Use case E: Provide integrity and authenticity checks.</h3>
+<ol>
+<li>The application monitors the Filecoin blockchain for the random, periodic proofs-of-space-time that the miner(s) will submit for each storage deal. When it encounters a proof for content that it has submitted, the application will update the corresponding storage deal metadata and index it for browsing and searching purposes.</li>
+<li>The application allows the user to periodically initiate their own check of the fixity of one, some, or all of their stored files. This process will guarantee to the user that the file(s) stored on the Filecoin network have not been changed and has remained in storage for an uninterrupted period of time. This is the key determinant in establishing the file’s authenticity. The result of this check will be added to the corresponding storage deal’s metadata and indexed for browsing and searching purposes.</li>
+</ol>
+
+
+
+<hr class="teal">
+
+<h3 style="margin-bottom: 10px;">Use case F: Renegotiate storage deals for files already on the Filecoin network.</h3>
+The application will monitor storage deals for upcoming expiry dates and if the renewal configuration is set to true, it will re-negotiate storage deals using the default configuration settings. The desktop application will negotiate the best price for the user using the maximum price and minimum deal length settings. It will also comply with the number of redundant copies and geographical distribution settings.
+
+
+<hr class="teal">
+
+<h3 style="margin-bottom: 10px;">Use case G: Retrieve files from the Filecoin network.</h3>
+<ol>
+  <li>The application will provide the user with a file browser style user interface to serve as a dashboard for directories, sub-directories and files stored on the Filecoin network. The user may click on a directory or file from this interface to initiate a retrieval request from the Filecoin network.</li>
+  <li>The application will also allow the user to request a file download from the deal metadata's browse and search interface.</li>
+  <li>The desktop application will allow the user to select a location on their host machine or networked file locations where the retrieved file(s) will be downloaded.</li>
+  <li>The application will search IPFS for the CID</li>
+  <li>If the CID is not available on IPFS, the application will search the Filecoin network for all possible providers of the desired data (via the DHT, the chain, or out-of-band aggregators), compare deal terms, and chose the best retrieval option.</li>
+  <li>Once a miner is selected:
+    <ol>
+      <li>the application will send a RetrievalQuery (“Here’s the PayloadCID of the data I want.”)</li>
+      <li>the miner sends a RetrievalQueryResponse (“I do have that data, and can send it to you for this price”.)</li>
+      <li>the desktop application sends a RetrievalDealProposal (“Yes I like those terms, go ahead.”)</li>
+      <li>the miner sends a RetrievalDealResponse (“I accept your deal.”)</li>
+      <li>the miner unseals the data</li>
+      <li>a payment channel is opened</li>
+      <li>the miner sends a RetrievalDealResponse (“Here's part of your data, pay me before I send the next.”)</li>
+      <li>the application confirms the data is correct, and sends the partial payment via the payment channel (“Here's the partial payment, keep going.”)</li>
+      <li>steps 7 and 8 are repeated until retrieval is complete</li>
+      <li>the last payment for the remainder of bytes is made and the retrieval deal is complete.</li>
+      <li>The application decrypts the files using the private key it has custody of.</li>
+      <li>The application will recreate the original directory and sub-directory structure in the designated download space.</li>
+    </ol>
+  </ol>
+
+
 
   <!-- row -->
   </div>
 
-  <div class="row">
-
-  <div class="col-md component-square">
-    <img src="static/desktop.png" class="img-fluid" style="width: 128px; length: 128px; margin: 50px 0px 30px 0px;"/>
-    <h2 style="margin-bottom: 30px;">desktop app</h2>
-
-    <div class="component-content">
-      <ul style="padding: 0; margin-left: 20px;">
-      <li>A cross-platform (Windows, Mac OS, Linux) desktop application (e.g. <a href="https://www.electronjs.org/">Electron</a>).</li>
-      <li>Allows for drag-n-drop of files and folders from file explorer or Desktop as well as an upload dialog.</li>
-      <li>The files or folders (with nested folders/files) become a Textile <a href="https://docs.textile.io/buckets/">Bucket</a>.</li>
-      <li>The app encrypts content by default (option to disable if user wants to publicly share content via <a href="https://ipfs.io">IPFS</a>/<a href="https://filecoin.io">Filecoin</a>).</li>
-      <li>The user manages their own private keys, including a seed phrase option (i.e. the objective is for a zero-trust architecture).</li>
-      <li>The app manages a Filecoin wallet (possibly in app or in Ethereum contract) to fund the storage deal.</li>
-      <li>The app provides a GUI for the user to set the number of redundant copies on Filecoin network, country preferences (if any), miner allow list (if any), miner deny list (if any).</li>
-      <li>The app notifies the user how long their content will be stored under the terms of the current storage deals.</li>
-      <li>The user has option to toggle number of copies and length of storage to play around with price and duration.</li>
-      <li>The user has option to set frequency of storage deal renewals and to have app automatically renegotiate new storage deals based on their (config preferences) and default storage period (e.g. renegotiate every day, week, month, 2 months, year) to try and arbitrage best rate.</li>
-      <li>The user deposits ETH and/or FIL in smart contract as escrow to fund the initial storage deal and subsequent renewals.</li>
-      <li>The app provides email warnings and pop-up notifications when funding is nearing its end and their content is in danger of being wiped from Filecoin miners (time-period and frequency of warnings is user configurable).</li>
-      <li>The app GUI provides a File Explorer type interface that includes all folders/files that are known to the app with colour coding to indicate whether a file is stored on Filecoin, is about to expire on Filecoin (expiration time-period is a configurable setting), is synced on IPFS, and/or has a local OS copy available.</li>
-      <li>The app GUI provides info on when the last time a proof-of-space-time was run against the file (i.e. serves as a fixity/authenticity check).</li>
-      <li>When user requests file retrieval, the app finds the cheapest retrieval deal amongst the miners in use and delivers files/folders to desktop (or designated folder on OS filesystem).</li>
-      <li>Enhancement: Include IPFS pinning on user-controlled machines and servers or on paid pinning services for redundancy and (hot) availability.</li>
-      <li>Enhancement: Allow for syncing of watched folders on OS (automatic updates to Filecoin Bucket) when a file is added, modified, or deleted in watched folder.</li>
-    </div>
-
-    <a href="https://github.com/pygate/pygate-desktop"><img src="static/github-logo2.png" class="img-fluid" style="width: 157px; length: 34px; margin: 50px 0px 30px 0px;"/></a>
-  </div>
-
-  <div class="col-md component-square">
-    <img src="static/smart-contract.png" class="img-fluid" style="width: 128px; length: 128px; margin: 50px 0px 30px 0px;"/>
-    <h2 style="margin-bottom: 30px;">smart contract</h2>
-
-    <div class="component-content">
-      <ul style="padding: 0; margin-left: 20px;">
-        <li>Serve as an escrow wallet that dispenses ETH and/or FIL to fund Filecoin storage deals.</li>
-    </div>
-
-    <a href="https://github.com/pygate/pygate-contracts"><img src="static/github-logo2.png" class="img-fluid" style="width: 157px; length: 34px; margin: 50px 0px 30px 0px;"/></a>
-  </div>
 
 
-  <!-- row -->
-  </div>
-
-
-<!-- Components-->
-</div>
 
 
 <div id="team">
