@@ -49,15 +49,15 @@ body {
   padding: 1em;
 }
 
-#about {
+#teal-section {
   padding: 8rem 0;
   background-color: #87d9df;
   color: #FFF;
   text-align: left;
 }
 
-#about a {
-  color: #212529;
+#about {
+  padding-top: 100px;
 }
 
 #about a:hover {
